@@ -2,6 +2,7 @@ import {Component, OnInit } from '@angular/core';
 import {FormControl, Validators, FormGroup ,FormsModule, ReactiveFormsModule, FormBuilder} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,10 @@ export class LoginComponent implements OnInit{
   email = new FormControl('', [Validators.required, Validators.email]);
   hide = true;
   loginForm!:FormGroup;
-  constructor(private http : HttpClient, private fb: FormBuilder, private router: Router) { }
+  constructor(private http : HttpClient,
+    private fb: FormBuilder,
+    private router: Router,
+    private servApi :LoginService) { }
 
   ngOnInit(): void {
     this.loginForm=this.fb.group ({
@@ -31,7 +35,7 @@ export class LoginComponent implements OnInit{
   }
 
   login(){
-    this.http.get<any>("http://localhost:3000/user")
+    this.servApi.getData()
     .subscribe(res=>{
       const user = res.find((a:any)=>{
         return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
