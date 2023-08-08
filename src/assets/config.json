@@ -1,25 +1,5 @@
 
-[
-    {
-      "email":"hello123@gmail.com",
-      "password":"123456"
-    },
-    {
-      "email":"nick@gmail.com",
-      "password":"123456"
-    },
-    {
-      "email":"nickolai@gmail.com",
-      "password":"123456"
-    },
-    {
-      "email":"alex@gmail.com",
-      "password":"123456"
-    },
-    {
-      "email":"anton@gmail.com",
-      "password":"123456"
-    }
-  ]
-
+  {
+    "apiUrl": "https://64c73fb60a25021fde923277.mockapi.io/users"
+  }
 

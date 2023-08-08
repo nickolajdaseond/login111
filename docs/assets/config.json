@@ -1,34 +1,5 @@
-{
-
-
-
-  "user": [
-     {
-      "url":"http://localhost:3000/user"
-
-     },
-
-
-    {
-      "email":"hello123@gmail.com",
-      "password":"123456"
-    },
-    {
-      "email":"nick@gmail.com",
-      "password":"123456"
-    },
-    {
-      "email":"nickolai@gmail.com",
-      "password":"123456"
-    },
-    {
-      "email":"alex@gmail.com",
-      "password":"123456"
-    },
-    {
-      "email":"anton@gmail.com",
-      "password":"123456"
-    }
-  ]
-
-}
+[
+  {
+    "apiUrl": "https://my-json-server.typicode.com/nickolajdaseond/loginmock-json/user"
+  }
+]

@@ -52,7 +52,13 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -62,6 +68,10 @@
           "configurations": {
             "production": {
               "browserTarget": "login-hch:build:production"
+            },
+            "options": {
+              "browserTarget": "unboxing:build",
+              "proxyConfig": "/assets/config.json"
             },
             "development": {
               "browserTarget": "login-hch:build:development"

@@ -1,8 +1,9 @@
-import {Component, OnInit } from '@angular/core';
-import {FormControl, Validators, FormGroup ,FormsModule, ReactiveFormsModule, FormBuilder} from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import {Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {FormControl, Validators, FormGroup , FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from '../services/login.service';
+import { Service } from '../service';
+import { IUser } from '../user';
+
 
 @Component({
   selector: 'app-login',
@@ -11,34 +12,47 @@ import { LoginService } from '../services/login.service';
 
 })
 export class LoginComponent implements OnInit{
-  email = new FormControl('', [Validators.required, Validators.email]);
+
+  @ViewChild('inputUsername', { static: true })
+  inputUsername!: ElementRef<HTMLInputElement>;
   hide = true;
+  data: IUser[] = [];
+  user=
+  {
+    username:'',
+    password:'',
+  }
+  username = new FormControl('', [Validators.required]);
   loginForm!:FormGroup;
-  constructor(private http : HttpClient,
+
+
+  constructor(
     private fb: FormBuilder,
     private router: Router,
-    private servApi :LoginService) { }
+    private loginservice :Service) {}
 
   ngOnInit(): void {
     this.loginForm=this.fb.group ({
-      email:['',Validators.required],
+      username:['',Validators.required],
       password:['',Validators.required],
       rememberMe: new FormControl(false)
     })
   }
 
   getErrorMessage() {
-    if (this.email.hasError('required')) {
+    if (this.username.hasError('required')) {
       return 'You must enter a value';
     }
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    return this.username.hasError('email') ? 'Not a valid email' : '';
   }
 
   login(){
-    this.servApi.getData()
-    .subscribe(res=>{
-      const user = res.find((a:any)=>{
-        return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
+    this.loginservice.getData()
+    .subscribe((user)=>{
+      this.data = user;
+
+       this.data.find((a:any)=>{
+        return  a.username === this.loginForm.value.username && a.password === this.loginForm.value.password
       });
       if(user){
         this.loginForm.reset();
@@ -53,6 +67,4 @@ export class LoginComponent implements OnInit{
       console.log(this.loginForm.value)
   }
 }
-
-
 }

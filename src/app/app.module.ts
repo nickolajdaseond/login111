@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +22,20 @@ import { MatOptionModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { ForgetComponent } from './forget/forget.component';
+import { APP_INITIALIZER } from '@angular/core';
+import { Service } from './service';
+import { RuntimeConfig } from 'runtime-config-loader';
+
+
+// import { ApiPrefixInterceptor } from './services/Api.Prefix.Interceptor';
+
+
+
+const loadservice = (servApi: Service) => {
+  return () => {
+    return servApi.getData();
+  };
+};
 
 @NgModule({
   declarations: [
@@ -50,8 +64,9 @@ import { ForgetComponent } from './forget/forget.component';
     MatOptionModule,
     HttpClientModule,
 
+
   ],
-  providers: [],
+  providers: [Service],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
