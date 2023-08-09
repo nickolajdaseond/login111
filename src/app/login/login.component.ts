@@ -1,8 +1,8 @@
-import {Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import {FormControl, Validators, FormGroup , FormBuilder} from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Service } from '../service';
-import { IUser } from '../user';
+import { Service } from '../shared/service';
 
 
 @Component({
@@ -12,20 +12,9 @@ import { IUser } from '../user';
 
 })
 export class LoginComponent implements OnInit{
-
-  @ViewChild('inputUsername', { static: true })
-  inputUsername!: ElementRef<HTMLInputElement>;
+  email = new FormControl('', [Validators.required, Validators.email]);
   hide = true;
-  data: IUser[] = [];
-  user=
-  {
-    username:'',
-    password:'',
-  }
-  username = new FormControl('', [Validators.required]);
   loginForm!:FormGroup;
-
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -33,28 +22,27 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
     this.loginForm=this.fb.group ({
-      username:['',Validators.required],
+      email:['',Validators.required],
       password:['',Validators.required],
       rememberMe: new FormControl(false)
     })
   }
 
   getErrorMessage() {
-    if (this.username.hasError('required')) {
+    if (this.email.hasError('required')) {
       return 'You must enter a value';
     }
-    return this.username.hasError('email') ? 'Not a valid email' : '';
+    return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
   login(){
     this.loginservice.getData()
-    .subscribe((user)=>{
-      this.data = user;
+    .subscribe(res=>{
 
-       this.data.find((a:any)=>{
-        return  a.username === this.loginForm.value.username && a.password === this.loginForm.value.password
+      let username = res.find((a:any)=>{
+        return  a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
       });
-      if(user){
+      if(username){
         this.loginForm.reset();
         this.router.navigate(["home"])
       } else{
@@ -67,4 +55,6 @@ export class LoginComponent implements OnInit{
       console.log(this.loginForm.value)
   }
 }
+
+
 }
