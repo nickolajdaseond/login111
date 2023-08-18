@@ -1,6 +1,5 @@
 import {  NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,7 +21,14 @@ import { MatOptionModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { ForgetComponent } from './forget/forget.component';
-import { Service } from './shared/service';
+import { Service,  } from './shared/service/service';
+import { APP_INITIALIZER } from '@angular/core';
+
+const initializerConfigFn = (appConfig: Service) => {
+  return () => {
+    return appConfig.loadConfig();
+  };
+};
 
 @NgModule({
   declarations: [
@@ -53,7 +59,13 @@ import { Service } from './shared/service';
 
 
   ],
-  providers: [Service],
+  providers: [ Service,
+    {provide: APP_INITIALIZER,
+    useFactory: initializerConfigFn,
+    multi: true,
+    deps: [Service],}],
+
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
