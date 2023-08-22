@@ -1,0 +1,43 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+.list {
+  display: flex;
+  justify-content: space-around;
+}
+
+::ng-deep table.mdc-data-table__table {
+  min-width: 85%;
+}
+table {
+  margin-top: 30px;
+  box-sizing: border-box;
+  box-shadow: 3px 3px rgb(0, 0, 0), -1em 0 .4em rgb(38, 35, 35);
+  background: white ;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 50%;
+  border: 1px solid #ddd;
+}
+.outer{
+  background: -webkit-linear-gradient(to right, #4286f4, #373B44);
+background: linear-gradient(to right, #4286f4, #373B44);
+}
+.mat-mdc-table .mdc-data-table__header-row {
+  background-color: #4286f4;
+}
+th{
+  color: white;
+}
+td {
+  padding: 8px;
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.mat-mdc-table .mdc-data-table__row{
+  height: 143px;
+}
+.mdc-data-table__header-cell {
+  padding: 0 80px 0 125px;
+}

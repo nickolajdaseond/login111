@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import { IUser } from "../module/user";
-import API_URL from 'src/assets/config.json'
-// import { Observable} from 'rxjs';
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -19,10 +14,14 @@ export class Service {
       .then( (data)=> {
         this.appConfig = data;
       });
-
 }
+//api of login
 getConfig():string {
   return this.appConfig.API_URL;
 }
-}
 
+//list on homepage
+getlist():string{
+  return this.appConfig.DATA_INFOR_LIST
+}
+}

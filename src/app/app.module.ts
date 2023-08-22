@@ -24,6 +24,7 @@ import { ForgetComponent } from './forget/forget.component';
 import { Service,  } from './shared/service/service';
 import { APP_INITIALIZER } from '@angular/core';
 
+
 const initializerConfigFn = (appConfig: Service) => {
   return () => {
     return appConfig.loadConfig();
