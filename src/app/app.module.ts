@@ -21,7 +21,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { ForgetComponent } from './forget/forget.component';
-import { Service,  } from './shared/service/service';
+import { Service} from './shared/service/service';
 import { APP_INITIALIZER } from '@angular/core';
 
 
@@ -60,7 +60,7 @@ const initializerConfigFn = (appConfig: Service) => {
 
 
   ],
-  providers: [ Service,
+  providers: [
     {provide: APP_INITIALIZER,
     useFactory: initializerConfigFn,
     multi: true,
